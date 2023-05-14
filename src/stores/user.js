@@ -7,22 +7,12 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('userStore', {
     state: () => (
             { 
-                userData: 'adroc65@outlook.es',
-                loginData: 'Usuario Logeado',
+                userData: null
             }
     ), //Retorno implisito.
-    
-    // Los GETTERS son similares a una propiedad computada, no cambian el valor del STATE
-    getters: {
-        minuscula( state ){
-            return state.userData.toLowerCase()
-        }
-    },
 
     // Las ACTIONS son similar a los Métodos se usan para modificar el estado.
     actions: {
-        registerUser(name) {
-            this.userData = name;
-        },
+       
     },
 })
