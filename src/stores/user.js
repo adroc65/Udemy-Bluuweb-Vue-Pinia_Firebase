@@ -23,6 +23,5 @@ export const useUserStore = defineStore('userStore', {
                 console.log(error);
             }
         }
-       
     },
 });
