@@ -3,9 +3,24 @@ import { createRouter, createWebHistory } from "vue-router"
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
+import { useUserStore } from './stores/user';
 
+// procedimiento de log.
+const requireAuth = async(to, from, next) => {
+    const userStore = useUserStore()
+    userStore.loadingSession = true;
+    const user = await userStore.currentUser()
+    if (user) {
+        next()
+    } else {
+        next('/login')
+    }
+    userStore.loadingSession = false;
+}
+
+// Definiendo rutas.
 const routes = [
-    { path:'/', component: Home },
+    { path:'/', component: Home, beforeEnter: requireAuth },
     { path:'/login', component: Login },
     { path:'/register', component: Register },
 ]

@@ -1,17 +1,20 @@
 <template>
   <div>
     <h1>App Base</h1>
-    <nav>
-      <RouterLink to="/">Home</RouterLink> |
-      <RouterLink to="/login">Login</RouterLink> |
-      <RouterLink to="/register">Register</RouterLink> |
-      <button>Logout</button>
+    <nav v-if="!userStore.loadingSession">
+      <RouterLink v-if="userStore.userData" to="/">Home</RouterLink> |
+      <RouterLink v-if="!userStore.userData" to="/login">Login</RouterLink> |
+      <RouterLink v-if="!userStore.userData" to="/register">Register</RouterLink> |
+      <button v-if="userStore.userData" @click="userStore.logOut">Logout</button>
     </nav>
+    <div v-else>Loading User...</div>
     <router-view></router-view>
   </div>
 </template>
 
 <script setup>
+  import { useUserStore } from './stores/user';
+  const userStore = useUserStore();
 
 </script>
 
